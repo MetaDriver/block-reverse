@@ -1,7 +1,7 @@
 <template>
 
     <div class="test256">
-        <h1> Buttons 256</h1>
+        <!--<h1> Buttons 256</h1>-->
         <div class="buttons">
             <div class="b-row" v-for="(row, i) in a16">
                 <div class="l-btn" :class="{'active': bs[i*spaceSize+j]}"
@@ -65,7 +65,7 @@
 $bsize: 30px;
     .test256 {
         padding: 0px 40px 40px 40px;
-        margin-top: -20px;
+        margin-top: 20px;
         display: flex;
         flex-flow: column nowrap;
         align-items: center;
