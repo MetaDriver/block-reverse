@@ -1,9 +1,9 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import Home from './views/Home.vue';
-import test256 from './views/test256.vue';
+import BlockReverse from './views/BlockReverse.vue';
 
-Vue.use(Router)
+Vue.use(Router);
 
 export default new Router({
     routes: [
@@ -21,9 +21,9 @@ export default new Router({
             component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
         },
         {
-            path: '/block-revers',
-            name: 'test256',
-            component: test256,
+            path: '/block-reverse',
+            name: 'BlockReverse',
+            component: BlockReverse,
         },
     ]
 })
