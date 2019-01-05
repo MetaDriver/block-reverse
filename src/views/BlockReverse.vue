@@ -2,8 +2,8 @@
 
     <div class="BlockReverse">
 
-        <h1>Hi !!</h1>
-        <brSpace :space-size="15" />
+        <brPanel/>
+        <brSpace :space-size="15"/>
 
     </div>
 
@@ -11,12 +11,13 @@
 
 <script>
     // import test from "@/test/test"
+    import brPanel from "@/components/brPanel"
     import brSpace from "@/components/brSpace"
 
     export default {
         name: "BlockReverse",
         props: [],
-        components: { brSpace },
+        components: {brPanel, brSpace},
         data() {
             return {
                 brData: {
@@ -34,6 +35,7 @@
 <style scoped lang="scss">
 
     .BlockReverse {
+        position: relative;
 
     }
 
