@@ -1,7 +1,6 @@
 <template>
 
-    <div class="test256">
-        <!--<h1> Buttons 256</h1>-->
+    <div class="brSpace">
         <div class="buttons">
             <div class="b-row" v-for="(row, i) in a16">
                 <div class="l-btn" :class="{'active': bs[i*spaceSize+j]}"
@@ -16,17 +15,17 @@
 
 <script>
 
-    const spaceSize = 15;
-    let bs = [];
+    // const spaceSize = 15;
 
     export default {
-        name: "test256",
-        props: [],
+        name: "brSpace",
+        props: [ "space-size" ],
         components: {},
         data() {
             return {
-                spaceSize: spaceSize,
+                // spaceSize: spaceSize,
 
+                _bs:[],
                 a16:[],
                 bs: [],
 
@@ -37,33 +36,32 @@
         methods: {
             inverse(i, j){
                 // this.bs.splice([i*spaceSize+j], 1, !this.bs[i*spaceSize+j]) ;
-                bs[i*spaceSize+j] ^= 1;
+                this._bs[i*this.spaceSize+j] ^= 1;
             },
             btnClick(i, j){
-                console.log(`btnClick ( ${i}, ${j} )`);
                 for(let ii = i-1; ii<=i+1; ii++) {
                     for(let jj = j-1; jj<=j+1; jj++) {
-                        this.inverse((ii + spaceSize) % spaceSize, (jj + spaceSize) % spaceSize);
+                        this.inverse((ii + this.spaceSize) % this.spaceSize, (jj + this.spaceSize) % this.spaceSize);
                     }
                 }
                 this.spaceUpdate();
             },
             spaceUpdate(){
-                this.bs = [...bs];
+                this.bs = [...this._bs];
             },
         },
         mounted() {
-            console.log('test256 :: loaded and worked !!!!!!!!  ');
-            this.a16 = Array(spaceSize).fill(0);
-            bs = Array(spaceSize*spaceSize).fill(0);
+            console.log('brSpace :: loaded and worked !!!!!!!!  ');
+            this.a16 = Array(this.spaceSize).fill(0);
+            this._bs = Array(this.spaceSize**2).fill(0);
             this.spaceUpdate();
         },
     };
 </script>
 
 <style scoped lang="scss">
-$bsize: 30px;
-    .test256 {
+    @import "../assets/css/global";
+    .brSpace {
         padding: 0px 40px 40px 40px;
         margin-top: 20px;
         display: flex;
