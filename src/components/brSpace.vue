@@ -3,7 +3,7 @@
     <div class="brSpace">
         <div class="buttons">
             <div class="b-row" v-for="(row, i) in a16">
-                <div class="l-btn" :class="{'active': bs[i*spaceSize+j]}"
+                <div class="l-btn" :class="{'active': bs[i*brData.spaceSize+j]}"
                      v-for="(b, j) in a16"
                      @click="btnClick(i, j)"
                 ></div>
@@ -19,7 +19,7 @@
 
     export default {
         name: "brSpace",
-        props: [ "space-size" ],
+        props: [ "br-data" ],
         components: {},
         data() {
             return {
@@ -36,12 +36,12 @@
         methods: {
             inverse(i, j){
                 // this.bs.splice([i*spaceSize+j], 1, !this.bs[i*spaceSize+j]) ;
-                this._bs[i*this.spaceSize+j] ^= 1;
+                this._bs[i*this.brData.spaceSize+j] ^= 1;
             },
             btnClick(i, j){
                 for(let ii = i-1; ii<=i+1; ii++) {
                     for(let jj = j-1; jj<=j+1; jj++) {
-                        this.inverse((ii + this.spaceSize) % this.spaceSize, (jj + this.spaceSize) % this.spaceSize);
+                        this.inverse((ii + this.brData.spaceSize) % this.brData.spaceSize, (jj + this.brData.spaceSize) % this.brData.spaceSize);
                     }
                 }
                 this.spaceUpdate();
@@ -49,12 +49,20 @@
             spaceUpdate(){
                 this.bs = [...this._bs];
             },
+                reset(){
+                this.a16 = Array(this.brData.spaceSize).fill(0);
+                this._bs = Array(this.brData.spaceSize**2).fill(0);
+                this.spaceUpdate();
+            }
+        },
+        watch: {
+           'brData.spaceSize': function (nV){
+              this.reset();
+           },
         },
         mounted() {
             console.log('brSpace :: loaded and worked !!!!!!!!  ');
-            this.a16 = Array(this.spaceSize).fill(0);
-            this._bs = Array(this.spaceSize**2).fill(0);
-            this.spaceUpdate();
+            this.reset();
         },
     };
 </script>

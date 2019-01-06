@@ -2,8 +2,13 @@
 
     <div class="BlockReverse">
 
-        <brPanel/>
-        <brSpace :space-size="15"/>
+        <brPanel
+                :br-data="brData"
+                @change-size="changeSize"
+        />
+        <brSpace
+                :br-data="brData"
+        />
 
     </div>
 
@@ -16,17 +21,19 @@
 
     export default {
         name: "BlockReverse",
-        props: [],
         components: {brPanel, brSpace},
         data() {
             return {
-                brData: {
 
+                brData: {
+                    spaceSize: 15
                 }
             }
         },
         computed: {},
-        methods: {},
+        methods: {
+            changeSize(newSize){ this.brData.spaceSize=newSize; },
+        },
         mounted() {
         },
     };

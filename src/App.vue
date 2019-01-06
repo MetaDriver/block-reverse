@@ -3,19 +3,19 @@
         <header class="header">
             <div class="container">
                 <div class="row">
-                    <col-12>
+                    <div class="col-12">
                         <router-link to="/">Home</router-link>
 
                         <router-link to="/about">About</router-link>
 
                         <router-link to="/block-reverse">Block Reverse</router-link>
-                    </col-12>
+                    </div>
                 </div>
             </div>
         </header>
         <main>
 
-            <router-view  :space-size="15"/>
+            <router-view />
 
         </main>
         <footer></footer>

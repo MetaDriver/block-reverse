@@ -7,7 +7,13 @@
             <span class="tong-sign">{{tongSign[opened]}}</span>
         </div>
         <div class="panel-content">
-                <input>
+            <form action="">Количество
+                <input  type="number"
+                        @input="changeSize(brData.spaceSize)"
+                        min="4" max="40"
+                        v-model="brData.spaceSize"
+                >
+            </form>
         </div>
 
     </div>
@@ -18,21 +24,25 @@
 
     export default {
         name: "brPanel",
+        props: [ "br-data" ],
         data() {
             return {
                 opened: 1,
                 tongSign: ['►', '×'],
-
             }
         },
         computed: {},
         methods: {
             clickTong(){
                 this.opened ^= 1;
-            }
+            },
 
+            changeSize(size){
+                this.$emit("change-size", +size);
+            },
         },
         mounted() {
+            console.log('brPanel::  this == ', this);
         },
 
     }
@@ -64,7 +74,7 @@
             top: 60px;
             width: 30px;
             height: 45px;
-            border-radius: 0 7px 7px 0;
+            border-radius: 0 50% 50% 0;
             transition: all 0.5s linear;
             .tong-sign {
                 transform-origin: left;
