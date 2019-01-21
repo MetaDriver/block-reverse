@@ -1,133 +1,66 @@
 <template>
-    <div class="brPanel" :class="{ opened }">
+
+    <div class="lgPanel" :class='opened ? "opened" : ""'>   <!-- "opened ? 'opened' : ''  эквивалентно   { opened } -->
         <div class="panel-tong"
              :class="{ opened }"
              @click="clickTong"
         >
-            <span class="tong-sign">{{tongSign[opened]}}</span>
+            <span class="tong-sign">
+             {{tongSign[opened]}}
+            </span>
         </div>
         <div class="panel-content">
-            <p>Размер</p>
-            <input type="number"
-                   min="1" max="40"
-                   v-model="size"
-                   :disabled="!brData.boardIsEmpty"
-                   @change="changeSize(size)"
-            >
-            <input type="text"
-                   maxlength="2"
-                   v-model="size"
-                   :disabled="!brData.boardIsEmpty"
-                   @change="changeSize(size)"
-            >
-            <p></p>
-            <p></p>
-            <button class="btn-reset" @click="reset">Reset</button>
-            <br>
-            {{brData.testVar}}
-
-
-
-
-
-
-            <button class="btn-reset"
-                    @click="brData.testTube('testVar' ,brData.testVar+1)"
-            >Inc Var
-
-
-
-
-
-            </button>
-            <hr>
-            <input type="number" v-model.number="x">
-            <br> <br>
-            <input type="number" v-model.number="y">
-            <br> <br>
-            <input type="number" v-model.number.lazy="result">
+            <p>Размер поля</p>
+            <input class="lg-size-input"
+                   type="number"
+                   min="2"
+                   max="40"
+                   v-model.lazy="inputValue"
+                   @change="changeSize(inputValue)"
+                   placeholder="Введите размер"
+            />
+            <p>{{inputValue}}</p>
+            <!--<button class="btn-reset">Reset</button>-->
         </div>
     </div>
+
 </template>
 
 <script>
-    //import xxx from "yyy/xxx";
-
+    // import test from "@/test/test"
+    // русский тест
     export default {
-        name: "brPanel",
-        props: ["br-data"],
+        name: "lgPanel",
+        props: [],
+        components: {},
         data() {
             return {
                 opened: 1,
                 tongSign: ['►', '×'],
-                size: 0,
-                x: 0,
-                y: 0,
-
+                inputValue: "",
             }
         },
         computed: {
-            result: {
-                get: function () {
-                    return (+this.x + (+this.y));
-                },
-                set: function (val) {
-//                    if(!val)  {return;}
-                    val = val==0?0.00001:val;
-                    let x=this.x, y=this.y,  sum = x+y;
-                    if(!sum){ return;}
-//                    if(sum===0){ return;}
-                    let norm= val / sum;
-                    this.x=x*norm;
-                    this.y=y*norm;
-                }
-            },
-
-
+            
         },
         methods: {
-            precission(val, dig)
-            {
-                return val - (val % dig);
-            }
-            ,
-            clickTong()
-            {
+            clickTong(){
                 this.opened ^= 1;
-            }
-            ,
-            changeSize(size)
+            },
+            changeSize(inputValue)
             {
-
-                size = !+size ? 15 : Math.max(1, size);
-                size = Math.min(40, size);
-                this.$emit("change-size", +size);
-
-            }
-            ,
-            clickBtnReset()
-            {
-
-            }
-            ,
-            reset()
-            {
-                this.$emit('reset');
-            }
-        }
-        ,
-        mounted()
-        {
-            console.log('brPanel::  this == ', this);
-        }
-        ,
-    }
+                this.$emit("change-size", +inputValue);
+            },
+        },
+        mounted(){
+        },
+    };
 </script>
 
 <style lang="scss" scoped>
     @import "../assets/css/global";
 
-    .brPanel {
+    .lgPanel {
         background-color: hsl(0, 0%, 97%);
         box-shadow: 0 0 8px 0;
         position: fixed;
@@ -201,6 +134,10 @@
         &.opened {
             left: 0px;
             transition: left 0.3s linear;
+        }
+        .lg-size-input {
+
+            width: 100%;
         }
     }
 

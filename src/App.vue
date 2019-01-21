@@ -1,5 +1,5 @@
 <template>
-    <div id="app">
+    <div class="app">
         <header class="header">
             <div class="container">
                 <div class="row">
@@ -9,14 +9,14 @@
                         <router-link to="/about">About</router-link>
 
                         <router-link to="/block-reverse">Block Reverse</router-link>
+
+                        <router-link to="/life-game">Life</router-link>
                     </div>
                 </div>
             </div>
         </header>
         <main>
-
-            <router-view />
-
+            <router-view/>
         </main>
         <footer></footer>
     </div>
@@ -31,9 +31,9 @@
 
 <style lang="scss">
 
-@import "./assets/css/global.scss";
+    @import "./assets/css/global.scss";
 
-    #app {
+    .app {
         font-family: 'Avenir', Helvetica, Arial, sans-serif;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;

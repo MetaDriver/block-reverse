@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import Home from './views/Home.vue';
 import BlockReverse from './views/BlockReverse.vue';
+import LifeGame from './views/LifeGame.vue';
 
 Vue.use(Router);
 
@@ -24,6 +25,11 @@ export default new Router({
             path: '/block-reverse',
             name: 'BlockReverse',
             component: BlockReverse,
+        },
+        {
+            path: '/life-game',
+            name: 'LifeGame',
+            component: LifeGame,
         },
     ]
 })

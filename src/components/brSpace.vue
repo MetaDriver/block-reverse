@@ -1,5 +1,4 @@
 <template>
-
     <div class="brSpace">
         <div class="buttons">
             <div class="b-row" v-for="(row, i) in a16">
@@ -9,66 +8,66 @@
                 ></div>
             </div>
         </div>
-    </div>
+        <br>
+        {{brData.testVar}}
 
+    </div>
 </template>
 
 <script>
-
-    // const spaceSize = 15;
-
     export default {
         name: "brSpace",
-        props: [ "br-data" ],
+        props: ["br-data"],
         components: {},
         data() {
             return {
-                // spaceSize: spaceSize,
-
-                _bs:[],
-                a16:[],
+                _bs: [],
+                a16: [],
                 bs: [],
-
-
             }
         },
         computed: {},
         methods: {
             inverse(i, j){
                 // this.bs.splice([i*spaceSize+j], 1, !this.bs[i*spaceSize+j]) ;
-                this._bs[i*this.brData.spaceSize+j] ^= 1;
+                this._bs[i * this.brData.spaceSize + j] ^= 1;
             },
             btnClick(i, j){
-                for(let ii = i-1; ii<=i+1; ii++) {
-                    for(let jj = j-1; jj<=j+1; jj++) {
+                for (let ii = i - 1; ii <= i + 1; ii++) {
+                    for (let jj = j - 1; jj <= j + 1; jj++) {
                         this.inverse((ii + this.brData.spaceSize) % this.brData.spaceSize, (jj + this.brData.spaceSize) % this.brData.spaceSize);
                     }
                 }
                 this.spaceUpdate();
+                this.$emit("board-used");
             },
             spaceUpdate(){
+                //  копирование одного массива в другой
                 this.bs = [...this._bs];
             },
-                reset(){
-                this.a16 = Array(this.brData.spaceSize).fill(0);
-                this._bs = Array(this.brData.spaceSize**2).fill(0);
+            reset(){
+                this.a16 = Array(this.brData.spaceSize);
+                this._bs = Array(this.brData.spaceSize ** 2).fill(0);
                 this.spaceUpdate();
             }
         },
         watch: {
-           'brData.spaceSize': function (nV){
-              this.reset();
-           },
+            'brData.spaceSize': function (nV) {
+                this.brData.spaceSize = !+nV ? 15 : Math.max(1, +nV);
+                this.reset();
+            },
         },
         mounted() {
             console.log('brSpace :: loaded and worked !!!!!!!!  ');
             this.reset();
+            this.$emit('register-reset', this.reset);
         },
     };
 </script>
 
 <style scoped lang="scss">
     @import "../assets/css/global";
+
     .brSpace {
         padding: 0px 40px 40px 40px;
         margin-top: 20px;
@@ -105,5 +104,4 @@
 
         }
     }
-
 </style>

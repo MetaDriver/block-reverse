@@ -1,17 +1,14 @@
 <template>
-
     <div class="BlockReverse">
-
-        <brPanel
-                :br-data="brData"
-                @change-size="changeSize"
+        <br-panel :br-data="brData"
+                 @change-size="changeSize"
+                 @reset="resetBoard"
         />
-        <brSpace
-                :br-data="brData"
+        <brSpace :br-data="brData"
+                 @register-reset="registerReset"
+                 @board-used="brData.boardIsEmpty=0"
         />
-
     </div>
-
 </template>
 
 <script>
@@ -21,18 +18,33 @@
 
     export default {
         name: "BlockReverse",
+
         components: {brPanel, brSpace},
         data() {
             return {
-
                 brData: {
-                    spaceSize: 15
+                    spaceSize: 15,
+                    testTube( varName, val ){
+                        this[varName] = val;
+                    },
+                    testVar: 5,
+                    boardIsEmpty: 1,
                 }
             }
         },
         computed: {},
         methods: {
-            changeSize(newSize){ this.brData.spaceSize=newSize; },
+            changeSize(newSize){
+                this.brData.spaceSize = newSize;
+            },
+            reset: ()=>{},
+            registerReset(reset){
+                this.reset = reset;
+            },
+            resetBoard(){
+                this.reset();
+                this.brData.boardIsEmpty = 1;
+            },
         },
         mounted() {
         },
@@ -40,10 +52,7 @@
 </script>
 
 <style scoped lang="scss">
-
     .BlockReverse {
         position: relative;
-
     }
-
 </style>
