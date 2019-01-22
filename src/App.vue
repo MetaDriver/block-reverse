@@ -10,6 +10,8 @@
 
                         <router-link to="/block-reverse">Block Reverse</router-link>
 
+                        <router-link to="/hexagonal-reverse">HexagonalReverse</router-link>
+
                         <router-link to="/life-game">Life</router-link>
                     </div>
                 </div>

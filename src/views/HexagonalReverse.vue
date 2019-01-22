@@ -1,29 +1,30 @@
 <template>
-    <div class="BlockReverse">
-        <brPanel :br-data="brData"
-                 @change-size="changeSize"
-                 @reset="resetBoard"
+
+    <div class="HexagonalReverse">
+        <hrPanel :hr-data="hrData"
+                  @change-size="changeSize"
+                  @reset="resetBoard"
         />
-        <brSpace :br-data="brData"
+        <hrSpace :hr-data="hrData"
                  @register-reset="registerReset"
-                 @board-used="brData.boardIsEmpty=0"
+                 @board-used="hrData.boardIsEmpty=0"
         />
     </div>
 </template>
 
 <script>
     // import test from "@/test/test"
-    import brPanel from "@/components/brPanel"
-    import brSpace from "@/components/brSpace"
+    import hrPanel from "@/components/hrPanel"
+    import hrSpace from "@/components/hrSpace"
 
     export default {
-        name: "BlockReverse",
+        name: "HexagonalReverse",
 
-        components: {brPanel, brSpace},
+        components: {hrPanel, hrSpace},
         data() {
             return {
-                brData: {
-                    spaceSize: 15,
+                hrData: {
+                    spaceSize: 30,
                     testTube( varName, val ){
                         this[varName] = val;
                     },
@@ -35,7 +36,7 @@
         computed: {},
         methods: {
             changeSize(newSize){
-                this.brData.spaceSize = newSize;
+                this.hrData.spaceSize = newSize;
             },
             reset: ()=>{},
             registerReset(reset){
@@ -43,7 +44,7 @@
             },
             resetBoard(){
                 this.reset();
-                this.brData.boardIsEmpty = 1;
+                this.hrData.boardIsEmpty = 1;
             },
         },
         mounted() {
@@ -52,7 +53,7 @@
 </script>
 
 <style scoped lang="scss">
-    .BlockReverse {
+    .HexagonalReverse {
         position: relative;
     }
 </style>
