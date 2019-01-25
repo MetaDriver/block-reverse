@@ -33,8 +33,8 @@
                 this._bs[i * this.brData.spaceSize + j] ^= 1;
             },
             btnClick(i, j){
-                for (let ii = i - 1; ii <= i + 1; ii++) {
-                    for (let jj = j - 1; jj <= j + 1; jj++) {
+                for (let ii = i ; ii <= i ; ii++) {
+                    for (let jj = j ; jj <= j ; jj++) {
                         this.inverse((ii + this.brData.spaceSize) % this.brData.spaceSize, (jj + this.brData.spaceSize) % this.brData.spaceSize);
                     }
                 }

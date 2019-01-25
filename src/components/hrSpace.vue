@@ -4,14 +4,14 @@
         <div class="buttons">
             <div class="b-row" :class="{even: i%2}"
                  v-for="(row, i) in a16">
-                <div class="l-btn" :class="{'active': bs[i*hrData.spaceSize+j]}"
+                <div class="l-btn" :class="{active: bs[(i*hrData.spaceSize+j).toString(36)]}"
                      v-for="(b, j) in a16"
                      @click="btnClick(i, j)"
                 ></div>
             </div>
         </div>
         <br>
-        {{hrData.testVar}}
+        <!--{{hrData.testVar}}-->
 
 
 
@@ -25,45 +25,54 @@
         components: {},
         data() {
             return {
-                _bs: [],
+//                _bs: [],
                 a16: [],
-                bs: [],
+                bs: {},
             }
         },
-        computed: {},
+        computed: {
+        },
         methods: {
             inverse(i, j){
-                // this.bs.splice([i*spaceSize+j], 1, !this.bs[i*spaceSize+j]) ;
-                this._bs[i * this.hrData.spaceSize + j] ^= 1;
+                this.bs[(i * this.hrData.spaceSize + j).toString(36)] ^= 1;
             },
             btnClick(i, j){
+//                this.hrData.testVar++;
                 let sz = this.hrData.spaceSize;
                 let fsz = function (val) {
                     return ((val + sz) % sz);
                 };
 
-//                this.inverse(fsz(i), fsz(j));
+                this.inverse(fsz(i), fsz(j));
 
-                this.inverse(fsz(i - 1), fsz(j));
-                this.inverse(fsz(i + 1), fsz(j));
+//                this.inverse(fsz(i - 1), fsz(j));
+//                this.inverse(fsz(i + 1), fsz(j));
+//
+//                this.inverse(fsz(i), fsz(j - 1));
+//                this.inverse(fsz(i), fsz(j + 1));
+//
+//                this.inverse(fsz(i - 1), fsz(j + (i % 2 * 2 - 1)));
+//                this.inverse(fsz(i + 1), fsz(j + (i % 2 * 2 - 1)));
 
-                this.inverse(fsz(i), fsz(j - 1));
-                this.inverse(fsz(i), fsz(j + 1));
-
-                this.inverse(fsz(i - 1), fsz(j + (i % 2 * 2 - 1)));
-                this.inverse(fsz(i + 1), fsz(j + (i % 2 * 2 - 1)));
-
-                this.spaceUpdate();
+//                console.log("hrData.testVar = "+this.hrData.testVar++);
+                //this.spaceUpdate();
                 this.$emit("board-used");
             },
             spaceUpdate(){
                 //  копирование одного массива в другой
-                this.bs = [...this._bs];
+                //this.bs = [...this._bs];
             },
             reset(){
                 this.a16 = Array(this.hrData.spaceSize);
-                this._bs = Array(this.hrData.spaceSize ** 2).fill(0);
-                this.spaceUpdate();
+                let total = this.hrData.spaceSize ** 2;
+                //this.bs.length = total;
+                this.bs = {};
+                for(let i=0; i<total; i++){
+                    this.$set(this.bs, [i.toString(36)], 0);
+                }
+//                console.log("this.bs.length = "+this.bs.length);
+//                this._bs = Array(total).fill(0);
+//                this.spaceUpdate();
             }
         },
         watch: {

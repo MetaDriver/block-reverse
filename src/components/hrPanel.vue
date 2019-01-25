@@ -10,7 +10,7 @@
         <div class="panel-content">
             <p>Размер</p>
             <input type="number"
-                   min="4" max="100" step="2"
+                   min="4" max="200" step="2"
                    v-model="size"
                    :disabled="!hrData.boardIsEmpty"
                    @input="changeSize(size)"
@@ -101,7 +101,7 @@
             {
 
                 size = !+size ? 15 : Math.max(1, size);
-                size = Math.min(100, size);
+                size = Math.min(200, size);
                 this.$emit("change-size", +size);
 
             }
