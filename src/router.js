@@ -4,6 +4,7 @@ import Home from './views/Home.vue';
 import BlockReverse from './views/BlockReverse.vue';
 import HexagonalReverse from './views/HexagonalReverse.vue';
 import LifeGame from './views/LifeGame.vue';
+import TriangleDistances from './views/TriangleDistances.vue';
 
 Vue.use(Router);
 
@@ -36,6 +37,11 @@ export default new Router({
             path: '/life-game',
             name: 'LifeGame',
             component: LifeGame,
+        },
+        {
+            path: '/distances',
+            name: 'TriangleDistances',
+            component: TriangleDistances,
         },
     ]
 })
