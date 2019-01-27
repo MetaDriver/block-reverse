@@ -25,22 +25,14 @@
             <p></p>
             <button class="btn-reset" @click="reset">Reset</button>
             <br>
+            <br>
+            <br>
             {{hrData.testVar}}
-
-
-
-
-
 
             <button class="btn-reset"
                     @click="hrData.testTube('testVar' ,hrData.testVar+1)"
-        >Inc Var
+            >Inc Var</button>
 
-
-
-
-
-            </button>
             <hr>
             <input type="number" v-model.number="x">
             <br> <br>

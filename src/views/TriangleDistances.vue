@@ -31,7 +31,8 @@
             calculatePoints(xLen) {
                 let allPoints = this.generatePoints(xLen);
                 allPoints.forEach(v=>{
-                    v.hip2 = (v.x2 = v.x**2) + (v.y2 = v.y**2 * 3);
+                    v.hip2 =  v.x**2 + v.y**2 * 3;
+//                    v.hip2 = (v.x2 = v.x**2) + (v.y2 = v.y**2 * 3);
                 });
                 allPoints.sort((a,b)=>a.hip2-b.hip2);
                 return this.groupPoints(allPoints);
@@ -42,7 +43,8 @@
                     for(let j=i-1; j>0; j-=2) {
                         arr.unshift({
                             x: i/2,
-                            y: (j-1)/2
+                            y: (j-1)/2,
+                            hip2: -1
                         });
                     }
                 }
@@ -64,7 +66,9 @@
             }
         },
         mounted() {
-            this.points = this.calculatePoints(300);
+            let start = Date.now();
+            this.points = this.calculatePoints(22);
+            console.log('Calc time::=',Date.now()-start);
         },
     };
 </script>
