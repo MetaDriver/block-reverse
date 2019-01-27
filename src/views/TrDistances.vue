@@ -1,6 +1,6 @@
 <template>
 
-    <div class="TriangleDistances">
+    <div class="TrDistances">
         <div class="ctr">
             <div class="row" v-for="(val, key, idx) in points">
                 <div class="col"
@@ -18,7 +18,7 @@
 <script>
     // import test from "@/test/test"
     export default {
-        name: "TriangleDistances",
+        name: "TrDistances",
         props: [],
         components: {},
         data() {
@@ -30,25 +30,60 @@
         computed: {},
         methods: {
             calculatePoints(xLen) {
-                let allPoints = this.generatePoints(xLen);
-                allPoints.forEach(v=>{
-                    v.r2 = (v.x2 = v.x**2) + (v.y2 = v.y**2 * 3);
-                });
-                allPoints.sort((a,b)=>a.r2-b.r2);
-                return this.groupPoints(allPoints);
+                // let allPoints = this.generatePoints(xLen);
+                // allPoints.forEach(v=>{
+                //     v.hip2 = (v.x2 = v.x**2) + (v.y2 = v.y**2 * 3);
+                // });
+                // allPoints.sort((a,b)=>a.hip2-b.hip2);
+                // return this.groupPoints(allPoints);
+                let allPoints = {};
+                for(let i = 1; i <= xLen; i++) {
+
+                    let pointBar = this.generatePointBar(i);
+                        // .forEach(v=>{
+                        //     v.hip2 = (v.x**2) + (v.y**2 * 3);
+                        // });
+                    pointBar.sort((a,b)=>a.r2-b.r2);
+                    allPoints = {...allPoints, ...this.groupPoints(pointBar)};
+                }
+                return allPoints;
             },
-            generatePoints(xLen){
+            generatePointBar(idx){
                 let arr = [];
-                for(let i=xLen*2; i--; ){
-                    for(let j=i-1; j>0; j-=2) {
-                        arr.unshift({
-                            x: i/2,
-                            y: (j-1)/2
+                let lr = idx**2;
+                let sr = (idx-1)**2;
+                let i=idx-1.5;
+        // debugger;
+                for(let j=0; j<idx; j++) {
+                    let offsetX = j%2/2;
+                    for(i+=(1.5); (i)**2 + (j/2)**2*3 > sr; i-=0.5){
+                        if((i)**2 + (j/2)**2*3 > lr || (i+j/2)%1) { continue; }
+                        let tx, ty;
+                        arr.push({
+                            x: tx = i,
+                            y: ty = j/2,
+                            x2: tx **= 2,
+                            y2: ty = ty**2 * 3,
+                            r2: tx + ty
                         });
                     }
                 }
                 return arr;
             },
+            // generatePoints(xLen){
+            //     let arr = [];
+            //     for(let i=xLen*2; i--; ){
+            //         for(let j=i-1; j>0; j-=2) {
+            //             arr.unshift({
+            //                 x: i/2,
+            //                 y: (j-1)/2
+            //             });
+            //         }
+            //     }
+            //     return arr;
+            // },
+
+
             groupPoints(inp) {
                let out = inp.reduce((a,v)=>{
                    if(!a[v.r2]) { a[v.r2] = [v]; }
@@ -59,25 +94,27 @@
                // debugger;
                // let l = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
                keys.forEach(v=>{
-                   // this.l[out[v].length]++;
+                   // l[out[v].length]++;
                    if (++this.l[out[v].length]>1) {
                        delete out[v];
                    }
-               });
+                       });
                // this.l = l;
                return out;
             }
         },
         mounted() {
-
-            this.points = this.calculatePoints(10);
+            let start = Date.now();
+            this.points = this.calculatePoints(20000);
+            console.log('Worked time ===',Date.now() - start);
+            console.log('this.l =', this.l);
         },
     };
 </script>
 
 <style scoped lang="scss">
 
-    .TriangleDistances {
+    .TrDistances {
         text-align: left;
         font-size: 12px;
         line-height: 1;
