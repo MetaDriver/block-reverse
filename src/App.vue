@@ -15,6 +15,8 @@
                         <router-link to="/life-game">Life</router-link>
 
                         <router-link to="/distances">Triangle Distances</router-link>
+
+                        <router-link to="/tr-distances">Tr Distances</router-link>
                     </div>
                 </div>
             </div>
@@ -59,6 +61,12 @@
         a {
             color: white;
             padding: 0 10px;
+            &.router-link-exact-active.router-link-active {
+                font-weight: bold;
+                &:hover {
+                    text-decoration: none;
+                }
+            }
         }
     }
 

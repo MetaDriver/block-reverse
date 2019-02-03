@@ -5,6 +5,7 @@ import BlockReverse from './views/BlockReverse.vue';
 import HexagonalReverse from './views/HexagonalReverse.vue';
 import LifeGame from './views/LifeGame.vue';
 import TriangleDistances from './views/TriangleDistances.vue';
+import TrDistances from './views/TrDistances.vue';
 
 Vue.use(Router);
 
@@ -42,6 +43,11 @@ export default new Router({
             path: '/distances',
             name: 'TriangleDistances',
             component: TriangleDistances,
+        },
+        {
+            path: '/tr-distances',
+            name: 'TrDistances',
+            component: TrDistances,
         },
     ]
 })
