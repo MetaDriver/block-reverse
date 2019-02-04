@@ -12,6 +12,8 @@
 
                         <router-link to="/hexagonal-reverse">Hexagonal Reverse</router-link>
 
+                        <router-link to="/circle-hexagonal">Circle Hexagonal</router-link>
+
                         <router-link to="/life-game">Life</router-link>
 
                         <router-link to="/distances">Triangle Distances</router-link>
