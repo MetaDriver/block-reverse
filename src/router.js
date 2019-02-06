@@ -3,6 +3,7 @@ import Router from 'vue-router';
 import Home from './views/Home.vue';
 import BlockReverse from './views/BlockReverse.vue';
 import HexagonalReverse from './views/HexagonalReverse.vue';
+import CircleHexagonal from './views/CircleHexagonal.vue';
 import LifeGame from './views/LifeGame.vue';
 import TriangleDistances from './views/TriangleDistances.vue';
 import TrDistances from './views/TrDistances.vue';
@@ -34,6 +35,12 @@ export default new Router({
             name: 'HexagonalReverse',
             component: HexagonalReverse,
         },
+        {
+            path: '/circle-hexagonal',
+            name: 'CircleHexagonal',
+            component: CircleHexagonal,
+        },
+
         {
             path: '/life-game',
             name: 'LifeGame',

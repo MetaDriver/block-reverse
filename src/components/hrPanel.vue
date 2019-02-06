@@ -1,3 +1,4 @@
+import router from './router'
 <template>
 
     <div class="hrPanel" :class="{ opened }">
