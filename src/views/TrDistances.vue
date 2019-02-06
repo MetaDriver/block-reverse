@@ -56,7 +56,7 @@
         // debugger;
                 for(let j=0; j<idx; j++) {
                     let offsetX = j%2/2;
-                    for(i+=(1.5); (i)**2 + (j/2)**2*3 > sr; i-=0.5){
+                    for(i+=(2.5); (i)**2 + (j/2)**2*3 > sr; i-=0.5){
                         if((i)**2 + (j/2)**2*3 > lr || (i+j/2)%1) { continue; }
                         let tx, ty;
                         arr.push({
@@ -94,8 +94,9 @@
                // debugger;
                // let l = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
                keys.forEach(v=>{
-                   // l[out[v].length]++;
-                   if (++this.l[out[v].length]>1) {
+                   this.l[out[v].length]++;
+                   // if (++this.l[out[v].length]>1 ) {
+                   if ( ((out[v].length+1)/2) || !((out[v][0].r2**0.5)%1)  ) {
                        delete out[v];
                    }
                        });
