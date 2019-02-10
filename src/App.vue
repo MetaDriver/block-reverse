@@ -19,6 +19,9 @@
                         <router-link to="/distances">Triangle Distances</router-link>
 
                         <router-link to="/tr-distances">Tr Distances</router-link>
+
+                        <router-link to="/block-list">List</router-link>
+
                     </div>
                 </div>
             </div>
@@ -47,18 +50,19 @@
         -moz-osx-font-smoothing: grayscale;
         text-align: center;
         color: #2c3e50;
-        padding-top: 100px;
+        padding-top: 80px;
     }
 
     .header {
         z-index: 1000;
         width: 100%;
-        height: 50px;
+        //height: 50px;
         position: fixed;
         top: 0;
         left: 0;
         background-color: hsl(30, 50%, 20%);
         padding-top: 15px;
+        padding-bottom: 15px;
         text-align: left;
         a {
             color: white;

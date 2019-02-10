@@ -105,7 +105,7 @@
         },
         mounted() {
             let start = Date.now();
-            this.points = this.calculatePoints(20000);
+            this.points = this.calculatePoints(200);
             console.log('Worked time ===',Date.now() - start);
             console.log('this.l =', this.l);
         },
