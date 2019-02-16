@@ -26,19 +26,9 @@
             <br>
             {{brData.testVar}}
 
-
-
-
-
-
             <button class="btn-reset"
                     @click="brData.testTube('testVar' ,brData.testVar+1)"
             >Inc Var
-
-
-
-
-
             </button>
             <hr>
             <input type="number" v-model.number="x">

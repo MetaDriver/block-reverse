@@ -7,7 +7,9 @@
                 <div class="l-btn" :class="{active: bs[(i*size32+j).toString(36)]}"
                      v-for="(b, j) in a16"
                      @click="btnClick(i,j)"
-                >{{(i-14)+":"+(j-13)}}</div>
+                >{{(i - 13) + ":" + (j - 13)}}
+
+                </div>
             </div>
         </div>
     </div>
@@ -34,7 +36,7 @@
                 this.bs[(i * this.size32 + j).toString(36)] ^= 1;
             },
             btnClick(i, j){
-                this.inverse(i, j);
+//                this.inverse(i, j);
 //                console.log("  ",i,":",j);
                 let szh = this.hrData.spaceSize;
                 let sz = this.size32;
@@ -44,6 +46,71 @@
                 let fszJ = function (val) {
                     return ((val + sz) % sz);
                 };
+
+                let fs1 = [{i: 0, j: 8}, {i: 2, j: 5}, {i: 2, j: 6}, {i: 3, j: 4},
+                    {i: 3, j: 5}, {i: 4, j: 4}, {i: 5, j: 4}, {i: 6, j: 4}];
+                let fs2 = [{i: 8, j: 4}, {i: 6, j: 1}, {i: 7, j: 1}, {i: 6, j: 0},
+                    {i: 7, j: 0}, {i: 6, j: -1}, {i: 7, j: -2}, {i: 7, j: -3}];
+                let fs3 = [{i: 8, j: -4}, {i: 4, j: -4}, {i: 5, j: -5}, {i: 3, j: -5},
+                    {i: 4, j: -5}, {i: 2, j: -5}, {i: 2, j: -6}, {i: 1, j: -7}];
+                let fs4 = [{i: 0, j: -8}, {i: -2, j: -5}, {i: -2, j: -6}, {i: -3, j: -5},
+                    {i: -3, j: -6}, {i: -4, j: -4}, {i: -5, j: -5}, {i: -6, j: -4}];
+                let fs5 = [{i: -8, j: -4}, {i: -6, j: -1}, {i: -7, j: -2}, {i: -6, j: 0},
+                    {i: -7, j: -1}, {i: -6, j: 1}, {i: -7, j: 1}, {i: -7, j: 2}];
+                let fs6 = [{i: -8, j: 4}, {i: -4, j: 4}, {i: -5, j: 4}, {i: -3, j: 4},
+                    {i: -4, j: 5}, {i: -2, j: 5}, {i: -2, j: 6}, {i: -1, j: 6}];
+
+                let f0 = [fs1, fs2, fs3, fs4, fs5, fs6];
+
+                fs1 = [{i: 0, j: 8}, {i: 2, j: 5}, {i: 2, j: 6}, {i: 3, j: 5},
+                    {i: 3, j: 6}, {i: 4, j: 4}, {i: 5, j: 5}, {i: 6, j: 4}];
+                fs2 = [{i: 8, j: 4}, {i: 6, j: 1}, {i: 7, j: 2}, {i: 6, j: 0},
+                    {i: 7, j: 1}, {i: 6, j: -1}, {i: 7, j: -1}, {i: 7, j: -2}];
+                fs3 = [{i: 8, j: -4}, {i: 4, j: -4}, {i: 5, j: -4}, {i: 3, j: -4},
+                    {i: 4, j: -5}, {i: 2, j: -5}, {i: 2, j: -6}, {i: 1, j: -6}];
+                fs4 = [{i: 0, j: -8}, {i: -2, j: -5}, {i: -2, j: -6}, {i: -3, j: -4},
+                    {i: -3, j: -5}, {i: -4, j: -4}, {i: -5, j: -4}, {i: -6, j: -4}];
+                fs5 = [{i: -8, j: -4}, {i: -6, j: -1}, {i: -7, j: -1}, {i: -6, j: 0},
+                    {i: -7, j: 0}, {i: -6, j: 1}, {i: -7, j: 2}, {i: -7, j: 3}];
+                fs6 = [{i: -8, j: 4}, {i: -4, j: 4}, {i: -5, j: 5}, {i: -3, j: 5},
+                    {i: -4, j: 5}, {i: -2, j: 5}, {i: -2, j: 6}, {i: -1, j: 7}];
+
+                let f1 = [fs1, fs2, fs3, fs4, fs5, fs6];
+
+                let shi = 13;
+                let shj = 13;
+                this.inverse(0 + shi, 0 + shj);
+                for (let c = 0; c < 8; c++) {
+                    let fl = false;
+                    for (let d = 0; d < 6; d++) {
+                        if (
+                            f0[d][c].j !== f1[d][c].j
+                        ) {
+                            //console.log();
+                            fl = true;
+                            break;
+                        }
+                    }
+                    if (!fl || fl) {   //
+                        for (let d = 0; d < 6; d++) {
+                            this.inverse(f1[d][c].i + shi, f1[d][c].j + shj);
+                        }
+                    }
+                    if (fl) {
+                        for (let d = 0; d < 6; d++) {
+                            if (
+                                f0[d][c].j !== f1[d][c].j
+                            ) {
+                                console.log("i[" + f0[d][c].i+"] j[" + f0[d][c].j + "   " + f1[d][c].j + "]*");
+                            }
+                            else {
+                                console.log("i[" + f0[d][c].i + "==" + f1[d][c].i + "] j[" + f0[d][c].j + "==" + f1[d][c].j + "]");
+                            }
+                        }
+                        console.log("");
+                    }
+                }
+
 //                this.inverse(fszI(i - 1), fszJ(j));
 //                this.inverse(fszI(i + 1), fszJ(j));
 //

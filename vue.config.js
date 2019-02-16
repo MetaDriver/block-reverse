@@ -4,13 +4,13 @@ module.exports = {
         sourceMap: true,
     },
     devServer: {
-        // proxy: {
-        //     '/api': {
-        //         target: 'https://stage.ccbh.cf',
-        //         changeOrigin: true,
-        //     },
-        // },
-        port: 9999,
+        proxy: {
+            '/api': {
+                target: 'https://velas.website',
+                changeOrigin: true,
+            },
+        },
+        port: 8080,
     },
 
 };
