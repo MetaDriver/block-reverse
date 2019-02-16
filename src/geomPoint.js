@@ -20,10 +20,15 @@ export class Index {
 
     fromPoint (point, ci) {
         this.i = Math.round(point.y / TRH);
-        this.j = ((point) => {
-            let t = Math.round(point.x * 2) / 2;
-            return  t - 0.25*( (ci%2 + (t % 1)*2)*2-1 );
-        })(point);
+
+        let t = Math.round(point.x * 2) / 2;
+
+        let os =  Math.abs(this.i%2);  // os == OddSum
+
+      //  if(os){ debugger; }
+
+        this.j = os ?  t - 0.5*( Math.abs((ci+this.i)%2)*2-1 ) : t;
+
         return this;
     };
 }
@@ -42,7 +47,13 @@ export class Point {
         return new Point(this.x, this.y);
     };
     fromIdx = function (indx, ci) {
-        this.x =  indx.j + 0.5*( (ci%2 + (indx.i % 2))*2-1) ;
+        // this.x =  indx.j + 0.5*( (ci%2 + (indx.i % 2))*2-1) ;
+
+        let os = Math.abs(indx.i % 2);  // os == Odd idx Sum
+
+        this.x =  os ? (Math.abs(ci % 2) ? indx.j - 0.5 : indx.j + 0.5)
+            : indx.j;
+
         // this.x = !(indx.i % 2) ? indx.j + 0.5*( (ci%2)*2-1) : indx.j - 0.5*( (ci%2)*2-1  );
         this.y = indx.i * TRH;
         return this;

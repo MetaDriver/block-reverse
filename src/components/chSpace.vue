@@ -4,9 +4,9 @@
         <div class="buttons">
             <div class="b-row" :class="{even: (i%2)}"
                  v-for="(row, i) in a18">
-                <div class="l-btn" :class="{active: (bs[(i*size32+j).toString(36)]), center: i===15&&j===13}"
+                <div class="l-btn" :class="{active: (bs[(i*size32+j).toString(36)]), center: i===center.i && j===center.j}"
                      v-for="(b, j) in a16"
-                     @click="btnClick(i,j)"
+                     @click="btnClick($event,i,j)"
                 ></div>
             </div>
         </div>
@@ -59,28 +59,31 @@
                     i: 0,
                     j: 0
                 },
+                center: {i:15, j:13},
             }
         },
         computed: {},
         methods: {
             getHexPoint(i,j) {
-            let lrPoint = this.rotateIdx(i,j,1);
-            let rrPoint = this.rotateIdx(i,j,-1);
-//               debugger;
-                return [
+                let lrPoint = this.rotateIdx(i,j,1);
+                let rrPoint = this.rotateIdx(i,j,-1);
+    //               debugger;
+                let temp = [
                     new Index(i,j),
                     new Index(lrPoint.i,lrPoint.j),
                     new Index(rrPoint.i,rrPoint.j),
-                    new Index(-i,-j),
-                    new Index(-lrPoint.i,-lrPoint.j),
-                    new Index(-rrPoint.i,-rrPoint.j)
+                    new Index(-i,-j-(!!((this.center.i-i)%2))+Math.abs(this.center.i%2)),
+                    new Index(-lrPoint.i,-lrPoint.j-(!!((lrPoint.i-this.center.i)%2))+Math.abs(this.center.i%2)),
+                    new Index(-rrPoint.i,-rrPoint.j-!!((rrPoint.i-this.center.i)%2)+Math.abs(this.center.i%2))
                 ];
+                console.log('temp =',temp);
+                return temp;
             },
 
             rotateIdx(i,j,dir){
                let inpVector = {y: 0.5, x: TRH * dir };
                let inpPoint = new Point(1,1);
-               inpPoint.fromIdx(new Index(i,j),15);
+               inpPoint.fromIdx(new Index(i,j),this.center.i);
 //               let dotProduct = inpPoint.x*inpVector.x + inpPoint.y*inpVector.y;
                let outPoint = new Point(
                    inpPoint.x * inpVector.y - inpPoint.y * inpVector.x,
@@ -88,14 +91,19 @@
                );
                let outIdx = new Index(0,0);
                
-               let result = outIdx.fromPoint(outPoint,15);
+               let result = outIdx.fromPoint(outPoint,this.center.i);
                return  result;
             },
             inverse(i, j){
                 this.bs[(i * this.size32 + j).toString(36)] ^= 1;
             },
-            btnClick(i, j){
-                console.log("btn i = ", i, " j = ", j);
+            btnClick(e, i, j){
+                console.log("btn i = ", i, " j = ", j, 'event =', e);
+                if(e.altKey || e.shiftKey || e.metaKey || e.ctrlKey) {
+
+                    this.center = {i,j};
+                    return;
+                }
                 //let j = pj + 1;
 //                let szh = this.chData.spaceSize;
 //                let sz = this.size32;
@@ -125,11 +133,11 @@
 //                    return radiusPoint(xi, yj);
 //                };
 
-                let ii = i - 15;
-                let jj = j - 13;
+                let ii = i - this.center.i;
+                let jj = j - this.center.j;
                 let points = this.getHexPoint(ii,jj);
                 for(let k = points.length; k--;) {
-                    this.inverse(points[k].i+15,points[k].j+13);
+                    this.inverse(points[k].i + this.center.i, points[k].j + this.center.j);
                 }
 //               this.inverse(i,j);
 
@@ -279,6 +287,7 @@
     .chSpace {
         padding: 0px 40px 40px 40px;
         margin-top: 20px;
+        margin-left: 200px;
         display: flex;
         flex-flow: column nowrap;
         align-items: center;
