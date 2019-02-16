@@ -6,7 +6,7 @@ module.exports = {
     devServer: {
         proxy: {
             '/api': {
-                target: 'http://test.swisstech.io',
+                target: 'https://velas.website',
                 changeOrigin: true,
             },
         },

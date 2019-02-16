@@ -8,6 +8,7 @@ import LifeGame from './views/LifeGame.vue';
 import TriangleDistances from './views/TriangleDistances.vue';
 import TrDistances from './views/TrDistances.vue';
 import BlockList from './views/BlockList.vue';
+import Card from './views/Card.vue';
 
 Vue.use(Router);
 
@@ -61,6 +62,11 @@ export default new Router({
             path: '/block-list',
             name: 'BlockList',
             component: BlockList,
+        },
+        {
+            path: '/card',
+            name: 'Card',
+            component: Card,
         },
 
 

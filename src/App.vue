@@ -22,6 +22,8 @@
 
                         <router-link to="/block-list">List</router-link>
 
+                        <router-link to="/card">Card</router-link>
+
                     </div>
                 </div>
             </div>

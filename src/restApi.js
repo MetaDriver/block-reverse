@@ -9,5 +9,8 @@ export default {
        velasHeaders(){
            return axios.get('/api/v1/headers');
        },
+    blocks(hash){
+        return axios.get('/api/v1/blocks' +  (!hash ? '' : `/${hash}`));
+    },
 
 };

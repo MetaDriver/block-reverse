@@ -3,6 +3,11 @@ import './plugins/axios';
 import App from './App.vue';
 import router from './router';
 
+
+import BootstrapVue from 'bootstrap-vue';
+
+Vue.use(BootstrapVue);
+
 Vue.config.productionTip = false;
 
 Vue.filter('truncHash', function trunc(value, len){
