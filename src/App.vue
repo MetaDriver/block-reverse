@@ -24,6 +24,8 @@
 
                         <router-link to="/card">Card</router-link>
 
+                        <router-link to="/sliding-window">Sliding Window</router-link>
+
                     </div>
                 </div>
             </div>

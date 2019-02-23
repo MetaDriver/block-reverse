@@ -15,7 +15,7 @@
     export default {
         name: "LifeGame",
         props: [],
-        components: { lgPanel, lgSpace, },
+        components: {lgPanel, lgSpace,},
         data() {
             return {
                 lgData: {

@@ -9,6 +9,8 @@ import TriangleDistances from './views/TriangleDistances.vue';
 import TrDistances from './views/TrDistances.vue';
 import BlockList from './views/BlockList.vue';
 import Card from './views/Card.vue';
+import SlidingWindow from './views/SlidingWindow.vue';
+
 
 Vue.use(Router);
 
@@ -67,6 +69,11 @@ export default new Router({
             path: '/card',
             name: 'Card',
             component: Card,
+        },
+        {
+            path: '/sliding-window',
+            name: 'SlidingWindow',
+            component: SlidingWindow,
         },
 
 

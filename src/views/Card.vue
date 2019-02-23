@@ -1,16 +1,19 @@
-<style  lang="scss">
+<style lang="scss">
 
     .Card {
         margin-bottom: 50px;
     }
 
     .toggle {
+        &:focus {
+            outline: none;
+        }
         position: relative;
         height: auto;
         width: 80px;
         justify-content: space-between;
         margin: 50px 0;
-        border-radius: 3px;
+        border-radius: 15px;
         background-color: hsl(0, 95%, 88%);
         &.on {
             background-color: hsl(116, 95%, 83%);
@@ -30,12 +33,13 @@
         position: relative;
         width: 300px;
         height: 350px;
+        overflow: auto;
         margin: 10px;
         margin-top: 20px;
         box-shadow: 0 0 10px;
         border-radius: 3px;
     }
-    
+
     .img-item {
         position: relative;
         width: 90%;
@@ -68,12 +72,14 @@
         <div v-if="toggleOn" v-html="insertedCss">
 
         </div>
-        <div class="container">
+        <div class="ctr">
             <div class="row">
                 <div class="col-12">
                     <button class="toggle" :class="{on:toggleOn}"
-                    @click="toggleOn^=1">{{toggleOn?"On":"Off"}}
+                            @click="toggleOn^=1">{{toggleOn ? "On" : "Off"}}
+
                     </button>
+                    <input type="text" v-model="hColor">
                     <div class="flx-cont" v-if="listData">
                         <div class="my-card"
                              v-for="(row, i) in cakes" :key="cards[i].id">
@@ -83,6 +89,7 @@
                             </div>
                             <div class="text-item">
                                 {{row.text}}
+
                             </div>
                         </div>
                     </div>
@@ -94,6 +101,7 @@
 </template>
 
 <script>
+
     // import test from "@/test/test"
     export default {
         name: "Card",
@@ -101,8 +109,8 @@
         components: {},
         data() {
             return {
-                insertedCss: "<style type='text/css'>.title-item {color:green; }</style>",
                 toggleOn: false,
+                hColor: 'green',
                 listData: null,
                 cards: [
                     {
@@ -158,7 +166,13 @@
                 ],
             }
         },
-        computed: {},
+        computed: {
+            insertedCss(){
+                return `<style >
+                                   .title-item {color: ${this.hColor}; }
+                             </style>`;
+            },
+        },
         methods: {},
         mounted(){
             let listData = (new Array(this.cards.length));
